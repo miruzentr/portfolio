@@ -132,6 +132,7 @@ footer span{color:var(--green)}
 #toTop:hover{border-color:var(--green);box-shadow:var(--glow)}
 
 .reveal{opacity:0;transform:translateY(30px);transition:.75s cubic-bezier(.2,.7,.3,1)}
+.no-js .reveal,.reveal.force-show{opacity:1;transform:none}
 .reveal.show{opacity:1;transform:none}
 @media(max-width:720px){.about-grid{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
@@ -306,6 +307,10 @@ addEventListener("mousemove",e=>{mouse.x=e.clientX;mouse.y=e.clientY});
   }
   requestAnimationFrame(loop)
 })();
+
+
+// safety: force-show reveals if anything fails
+setTimeout(()=>document.querySelectorAll(".reveal:not(.show)").forEach(e=>e.classList.add("show")),1500);
 
 // ---- typing ----
 const words=["bots 🤖","automation tools ⚙️","web scrapers 🕸️","cool stuff ✨","AI things 🧠"];
